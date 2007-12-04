@@ -1,6 +1,6 @@
 %define name	inventory
 %define version 0.65
-%define release 3mdk
+%define release  %mkrel 3
 
 Name: 	 	%{name}
 Summary: 	Simple GTK2 inventory program using MySQL
