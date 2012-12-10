@@ -7,15 +7,14 @@ Summary: 	Simple GTK2 inventory program using MySQL
 Version: 	%{version}
 Release: 	%{release}
 
-Source:		%{name}-%{version}.tar.bz2
+Source0:		%{name}-%{version}.tar.bz2
 Source1: 	%{name}48.png
 Source2: 	%{name}32.png
 Source3: 	%{name}16.png
 URL:		http://qballsinventory.sourceforge.net/
 License:	GPL
 Group:		Databases
-BuildRoot:	%{_tmppath}/%{name}-buildroot
-BuildRequires:	pkgconfig gtk2-devel mysql-devel
+BuildRequires:	pkgconfig pkgconfig(gtk+-2.0) mysql-devel
 
 %description
 Inventory is a gtk+-2 inventory program that uses a mysql database as backend.
@@ -46,7 +45,6 @@ use.  Features include:
 %make
 										
 %install
-rm -rf $RPM_BUILD_ROOT
 %makeinstall
 
 #menu
@@ -69,20 +67,7 @@ cat %SOURCE2 > $RPM_BUILD_ROOT/%_iconsdir/%name.png
 mkdir -p $RPM_BUILD_ROOT/%_miconsdir
 cat %SOURCE3 > $RPM_BUILD_ROOT/%_miconsdir/%name.png
 
-%find_lang %name
-
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-%if %mdkversion < 200900
-%post
-%update_menus
-%endif
-		
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%endif
+%find_lang %name || touch %{name}.lang
 
 %files -f %{name}.lang
 %defattr(-,root,root)
@@ -94,3 +79,58 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/%name.png
 %{_miconsdir}/%name.png
 
+
+
+%changelog
+* Thu Mar 17 2011 Oden Eriksson <oeriksson@mandriva.com> 0.65-12mdv2011.0
++ Revision: 645805
+- relink against libmysqlclient.so.18
+
+* Sat Jan 01 2011 Oden Eriksson <oeriksson@mandriva.com> 0.65-11mdv2011.0
++ Revision: 627251
+- rebuilt against mysql-5.5.8 libs, again
+
+* Thu Dec 30 2010 Oden Eriksson <oeriksson@mandriva.com> 0.65-10mdv2011.0
++ Revision: 626530
+- rebuilt against mysql-5.5.8 libs
+
+* Fri Dec 10 2010 Oden Eriksson <oeriksson@mandriva.com> 0.65-8mdv2011.0
++ Revision: 619653
+- the mass rebuild of 2010.0 packages
+
+* Fri Sep 11 2009 Thierry Vignaud <tv@mandriva.org> 0.65-7mdv2010.0
++ Revision: 437962
+- rebuild
+
+* Sat Dec 06 2008 Oden Eriksson <oeriksson@mandriva.com> 0.65-6mdv2009.1
++ Revision: 311336
+- rebuilt against mysql-5.1.30 libs
+
+* Thu Jul 24 2008 Thierry Vignaud <tv@mandriva.org> 0.65-5mdv2009.0
++ Revision: 247233
+- rebuild
+
+  + Pixel <pixel@mandriva.com>
+    - rpm filetriggers deprecates update_menus/update_scrollkeeper/update_mime_database/update_icon_cache/update_desktop_database/post_install_gconf_schemas
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+* Tue Dec 18 2007 Thierry Vignaud <tv@mandriva.org> 0.65-3mdv2008.1
++ Revision: 132141
+- auto-convert XDG menu entry
+- kill re-definition of %%buildroot on Pixel's request
+- use %%mkrel
+- import inventory
+
+
+* Wed May 25 2005 Nicolas Lécureuil <neoclust@mandriva.org> 0.65-3mdk
+- Rebuild
+
+* Fri Apr 2 2004 Austin Acton <austin@mandrake.org> 0.65-2mdk
+- stale rebuild
+- delib buildrequires
+- configure 2.5
+
+* Sun Mar 30 2003 Austin Acton <aacton@yorku.ca> 0.65-1mdk
+- initial package
