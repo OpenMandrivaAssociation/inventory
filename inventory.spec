@@ -11,7 +11,7 @@ Source0:		%{name}-%{version}.tar.bz2
 Source1: 	%{name}48.png
 Source2: 	%{name}32.png
 Source3: 	%{name}16.png
-URL:		http://qballsinventory.sourceforge.net/
+URL:		https://qballsinventory.sourceforge.net/
 License:	GPL
 Group:		Databases
 BuildRequires:	pkgconfig pkgconfig(gtk+-2.0) mysql-devel
