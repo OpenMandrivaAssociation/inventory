@@ -14,6 +14,11 @@ Source3: 	%{name}16.png
 URL:		https://qballsinventory.sourceforge.net/
 License:	GPL
 Group:		Databases
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig pkgconfig(gtk+-2.0) mysql-devel
 
 %description
